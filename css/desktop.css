@@ -1,0 +1,45 @@
+	#desktop{
+		display: -moz-box;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		-moz-box-orient: vertical;
+		-webkit-box-orient: vertical;
+	}
+	#desktop *{
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	#innerdesktop{
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		width: 100%;
+		-moz-box-flex: 1;
+		-webkit-box-flex: 1;
+	}
+	#taskbar{
+		display: box;
+		display: -webkit-box;
+		display: -moz-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		width: 100%;
+		height: 40px;
+		background-color: rgba( 0, 0, 0, 0.8);
+	}
+	#start_menu{
+		width: 340px;
+		height: 550px;
+		position: absolute;
+		/*bottom: $(#taskbar).css(height);*/
+		left: 0px;
+		z-index: 10001;
+		color: white;
+		background-color: rgba(0,0,0,0.85);
+		border-top: 0.5px solid rgba(255,255,255,0.2);
+		border-right: 0.5px solid rgba(255,255,255,0.2);
+		outline: none;
+	}

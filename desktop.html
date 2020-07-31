@@ -1,0 +1,94 @@
+<link rel="stylesheet" type="text/css" href="css/desktop.css"/>
+<link rel="stylesheet" type="text/css" href="css/desktop_icon.css" />
+<link rel="stylesheet" type="text/css" href="css/taskbar.css"/>
+<link rel="stylesheet" type="text/css" href="css/start_menu.css"/>
+<div id="innerdesktop"></div>
+<div id="taskbar">
+	<div id="start_div" class="taskbaricon"></div>
+	<div id="program_list">
+		<!--<div class="program">
+			<img src="img/icon/chrome.ico"/> <span>webwindows - Google Chrome</span>
+		</div>-->
+	</div>
+	<div id="notice_div"></div>
+	<div id="hide_or_show_the_desktop"></div>
+</div>
+<div id="start_menu" tabindex="-1">
+	<!--<span style='font-size: 1.5em;'>开始菜单是空的</span>-->
+	<div id="left_start_menu">
+		<!--<input type="button" id="" value="" />-->
+		<div id="shutdown_button"></div>
+	</div>
+	<div id="middle_start_menu">
+	</div>
+	<div id="right_start_menu">
+	</div>
+</div>
+<script type="text/javascript">
+	$("#start_menu").hide();
+	var programs;
+	$.getJSON("setting/program.json",function(tmp_json){
+		programs = tmp_json;
+	});
+</script>
+<!--<script src="js/jquery-1.8.2.min.js"></script>-->
+<script src="js/jquery.contextMenu.js"></script>
+<script src="js/jquery.ui.position.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.contextMenu.css"/>
+<link rel="stylesheet" type="text/css" href="css/desktop_window.css"/>
+<script src="js/window.js"></script>
+<script src="js/desktop_icon.js"></script>
+<script src="js/taskbar_icon.js"></script>
+<script src="js/start_menu_icon.js"></script>
+<script>
+	$(function(){
+		$.contextMenu({
+			selector: "#desktop", 
+			callback: function(key, options) {
+				var m = "clicked: " + key;
+//				console.log(m); 
+				if(key == "refresh"){
+					desktop_refresh();
+				}
+				else if(key == "quanping"){
+					screenfull.toggle($("body").get(0));
+				}
+			},
+			items: {
+				"refresh": {"name": "刷新", "icon": "refresh"},
+				"quanping": {"name": "切换全屏"},
+				"sep1": "---------",
+				"edit0": {"name": "以下功能不可用", icon: "warning"},
+				"edit1": {"name": "查看"},
+				"edit2": {"name": "排序方式"},
+				"edit3": {"name": "复制"},
+				"edit4": {"name": "粘贴"},
+				"edit5": {"name": "粘贴快捷方式"},
+				"edit6": {"name": "新建"},
+				"edit7": {"name": "显示设置"},
+				"edit8": {"name": "个性化"},
+				"sep2": "---------",
+				"edit": {name: "Edit", icon: "edit"},
+				"cut": {name: "Cut", icon: "cut"},
+				"copy": {name: "Copy", icon: "copy"},
+				"paste": {name: "Paste", icon: "paste"},
+				"delete": {name: "Delete", icon: "delete"},
+				"sep1": "---------",
+				"quit": {name: "Quit", icon: "quit"}
+	        }
+		});
+		$.contextMenu({
+			selector: ".program",
+			callback: function(key, options) {
+//				console.log("clicked: " + key); 
+				if(key == "exit_program"){
+					$("#"+$(this).attr("window_id")).remove();
+					$(this).remove();
+				}
+			},
+			items: {
+				"exit_program": {name: "关闭程序", icon: "warning"}
+	        }
+		});
+	});
+</script>
